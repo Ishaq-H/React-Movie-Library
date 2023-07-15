@@ -5,8 +5,8 @@ import Landing from "./pages/Landing";
 const App = () => {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
-        <Nav />
         <Route path="/" element={<Landing />}></Route>
       </Routes>
     </BrowserRouter>

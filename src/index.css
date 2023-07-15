@@ -100,10 +100,6 @@ nav {
 
 /* HEADER */
 
-.header__padding {
-  padding-bottom: 320px;
-}
-
 .header__row {
   display: flex;
   flex-direction: column;
@@ -179,7 +175,7 @@ nav {
 /* MOVIES */
 
 .movies__container {
-  display: none;
+  display: flex;
 }
 
 .movies__row {
