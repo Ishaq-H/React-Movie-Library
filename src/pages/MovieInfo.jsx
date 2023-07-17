@@ -51,18 +51,16 @@ const MovieInfo = () => {
               <h2 className="movie__selected--title--top">Recommended</h2>
             </div>
             <div className="movies">
-              <div className="movie">
-                <Link to="/">
-                  <figure className="movie__img--wrapper">
-                    <img src={Poster} alt="" className="movie__img" />
-                  </figure>
-                </Link>
-                <div className="movie__name">
-                  <Link to="/">Spider Man</Link>
+              {/* {movies.map((movie) => (
+                <div className="movie" key={movie.imdbID}>
+                  <Link to={`/movies/${movie.imdbID}`}>
+                    <figure className="movie__img--wrapper">
+                      <img src={movie.poster} alt="" className="movie__img" />
+                    </figure>
+                  </Link>
+                  
                 </div>
-                <div className="movie__ratings">7.1</div>
-                <div className="movie__release">03 Apr 2015</div>
-              </div>
+              ))} */}
             </div>
           </div>
         </div>

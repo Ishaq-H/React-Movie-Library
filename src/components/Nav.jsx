@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo.jpg";
 
 const Nav = () => {
+  const handleLogoClick = () => {
+    window.location.reload(); // Reload the page
+  };
   return (
     <>
       <nav>
@@ -9,6 +12,7 @@ const Nav = () => {
           className="nav__logo--wrapper"
           // onClick=window.location.reload()
           to="/"
+          onClick={handleLogoClick}
         >
           <img src={Logo} alt="" className="nav__logo" />
         </Link>
