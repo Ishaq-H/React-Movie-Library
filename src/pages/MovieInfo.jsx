@@ -1,8 +1,31 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
-import Poster from "../assets/poster.jpg";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
-const MovieInfo = () => {
+const MovieInfo = ({ movies }) => {
+  const { imdbID } = useParams();
+  const [movie, setMovie] = useState([]);
+
+  async function fetchMovie() {
+    try {
+      const { data } = await axios.get(
+        `http://www.omdbapi.com/?apikey=bdab0567&i=${imdbID}`
+      );
+      setMovie(data || []);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMovie();
+  }, [imdbID]);
+
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <main id="movie-info">
@@ -18,27 +41,26 @@ const MovieInfo = () => {
             </div>
             <div className="movie__selected">
               <figure className="movie__selected--figure">
-                <img src={Poster} alt="" className="movie__selected--img" />
+                <img
+                  src={movie.Poster}
+                  alt=""
+                  className="movie__selected--img"
+                />
               </figure>
               <div className="movie__selected--description">
                 <div className="movie__selected--description-top">
-                  <h2 className="movie__selected--title">Spider Man</h2>
-                  <h2 className="movie__selected--year">(2002)</h2>
+                  <h2 className="movie__selected--title">{movie.Title}</h2>
+                  <h2 className="movie__selected--year">({movie.Year})</h2>
                 </div>
                 <div className="movie__selected--description-details">
                   <h2 className="movie__details-title">Director:</h2>
-                  <h3 className="movie__details">Sam Raimi</h3>
+                  <h3 className="movie__details">{movie.Director}</h3>
                   <h2 className="movie__details-title">Writers:</h2>
-                  <h3 className="movie__details">Stan Lee, Steve Ditko</h3>
+                  <h3 className="movie__details">{movie.Writer}</h3>
                   <h2 className="movie__details-title">Actors:</h2>
-                  <h3 className="movie__details">Toby Maguire</h3>
+                  <h3 className="movie__details">{movie.Actors}</h3>
                   <h2 className="movie__details-title">Plot:</h2>
-                  <p className="movie__details para">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptas repellendus consectetur veritatis provident odio,
-                    dolor molestiae ipsam nulla nemo sapiente eveniet iste ab
-                    sed exercitationem corrupti, velit dolorum deserunt iusto!
-                  </p>
+                  <p className="movie__details para">{movie.Plot}</p>
                 </div>
               </div>
             </div>
@@ -51,16 +73,15 @@ const MovieInfo = () => {
               <h2 className="movie__selected--title--top">Recommended</h2>
             </div>
             <div className="movies">
-              {/* {movies.map((movie) => (
+              {movies.map((movie) => (
                 <div className="movie" key={movie.imdbID}>
                   <Link to={`/movies/${movie.imdbID}`}>
                     <figure className="movie__img--wrapper">
                       <img src={movie.poster} alt="" className="movie__img" />
                     </figure>
                   </Link>
-                  
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
         </div>
