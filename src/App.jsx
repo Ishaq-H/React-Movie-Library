@@ -18,7 +18,7 @@ const App = () => {
           />
           <Route
             path="/movies/:imdbID"
-            element={<MovieInfo movies={movies} />}
+            element={<MovieInfo movies={movies} setMovies={setMovies} />}
           />
         </Routes>
       </div>

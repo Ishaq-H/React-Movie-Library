@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "./Loading";
 
-const MovieInfo = ({ movies }) => {
+const MovieInfo = (movies, setMovies) => {
   const { imdbID } = useParams();
   const [loading, setLoading] = useState();
-  const [movie, setMovie] = useState([]);
+  // const [movie, setMovie] = useState([]);
 
   async function fetchMovie() {
     setLoading(true);
@@ -15,7 +15,7 @@ const MovieInfo = ({ movies }) => {
       const { data } = await axios.get(
         `http://www.omdbapi.com/?apikey=bdab0567&i=${imdbID}`
       );
-      setMovie(data || []);
+      setMovies(data || []);
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -46,32 +46,32 @@ const MovieInfo = ({ movies }) => {
                 <div className="movie__selected">
                   <figure className="movie__selected--figure">
                     <img
-                      src={movie.Poster}
+                      src={movies.Poster}
                       alt=""
                       className="movie__selected--img"
                     />
                   </figure>
                   <div className="movie__selected--description">
                     <div className="movie__selected--description-top">
-                      <h2 className="movie__selected--title">{movie.Title}</h2>
-                      <h2 className="movie__selected--year">({movie.Year})</h2>
+                      <h2 className="movie__selected--title">{movies.Title}</h2>
+                      <h2 className="movie__selected--year">({movies.Year})</h2>
                     </div>
                     <div className="movie__selected--description-details">
                       <div className="info--wrapper">
                         <h2 className="movie__details-title">Director:</h2>
-                        <h3 className="movie__details">{movie.Director}</h3>
+                        <h3 className="movie__details">{movies.Director}</h3>
                       </div>
                       <div className="info--wrapper">
                         <h2 className="movie__details-title">Writers:</h2>
-                        <h3 className="movie__details">{movie.Writer}</h3>
+                        <h3 className="movie__details">{movies.Writer}</h3>
                       </div>
                       <div className="info--wrapper">
                         <h2 className="movie__details-title">Actors:</h2>
-                        <h3 className="movie__details">{movie.Actors}</h3>
+                        <h3 className="movie__details">{movies.Actors}</h3>
                       </div>
                       <div className="info--wrapper">
                         <h2 className="movie__details-title">Plot:</h2>
-                        <p className="movie__details para">{movie.Plot}</p>
+                        <p className="movie__details para">{movies.Plot}</p>
                       </div>
                     </div>
                   </div>
