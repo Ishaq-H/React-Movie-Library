@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Header = (movies, setMovies) => {
+const Header = () => {
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
