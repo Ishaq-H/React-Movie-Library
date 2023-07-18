@@ -9,14 +9,19 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   return (
     <BrowserRouter>
-      <Nav />
-      <Routes>
-        <Route
-          path="/"
-          element={<Landing movies={movies} setMovies={setMovies} />}
-        />
-        <Route path="/movies/:imdbID" element={<MovieInfo movies={movies} />} />
-      </Routes>
+      <div className="main">
+        <Nav />
+        <Routes>
+          <Route
+            path="/"
+            element={<Landing movies={movies} setMovies={setMovies} />}
+          />
+          <Route
+            path="/movies/:imdbID"
+            element={<MovieInfo movies={movies} />}
+          />
+        </Routes>
+      </div>
       <Footer />
     </BrowserRouter>
   );

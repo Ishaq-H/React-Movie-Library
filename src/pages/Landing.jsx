@@ -5,13 +5,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Header = ({ movies, setMovies }) => {
+  const [loading, setLoading] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
   async function fetchMovies() {
+    setLoading(true);
     const { data } = await axios.get(
       `http://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
     );
     setMovies(data.Search || []);
+    setLoading(false);
   }
 
   const handleKeyPress = (event) => {
@@ -21,9 +24,9 @@ const Header = ({ movies, setMovies }) => {
     }
   };
 
-  const handleLogoClick = () => {
-    window.location.reload(); // Reload the page
-  };
+  // const handleLogoClick = () => {
+  //   window.location.reload(); // Reload the page
+  // };
 
   useEffect(() => {
     fetchMovies();
@@ -37,7 +40,7 @@ const Header = ({ movies, setMovies }) => {
             <Link to="/">
               <figure
                 className="header__logo--wrapper"
-                onClick={handleLogoClick}
+                //onClick={handleLogoClick}
               >
                 <img className="header__logo" src={Popcorn} alt="" />
               </figure>
@@ -53,7 +56,11 @@ const Header = ({ movies, setMovies }) => {
                   onKeyDown={handleKeyPress}
                 />
                 <div className="header__search--button" onClick={fetchMovies}>
-                  <FontAwesomeIcon icon="magnifying-glass" />
+                  {!loading ? (
+                    <FontAwesomeIcon icon="magnifying-glass" />
+                  ) : (
+                    <FontAwesomeIcon icon="spinner" spin />
+                  )}
                 </div>
               </form>
             </div>
