@@ -3,11 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "./Loading";
+import LoadingRec from "./LoadingRec";
 
 const MovieInfo = () => {
   const { imdbID } = useParams();
   const [loading, setLoading] = useState();
   const [movie, setMovie] = useState([]);
+  const [recommended, setRecommended] = useState([]);
 
   async function fetchMovie() {
     setLoading(true);
@@ -22,8 +24,23 @@ const MovieInfo = () => {
     }
   }
 
+  async function fetchRecommended() {
+    setLoading(true);
+    try {
+      const searchTerm = localStorage.getItem("movies");
+      const { data } = await axios.get(
+        `http://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
+      );
+      setRecommended(data.Search || []);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     fetchMovie();
+    fetchRecommended();
   }, [imdbID]);
 
   return (
@@ -87,15 +104,25 @@ const MovieInfo = () => {
               <h2 className="movie__selected--title--top">Recommended</h2>
             </div>
             <div className="movies">
-              {/* {movies.map((movie) => (
-                <div className="movie" key={movie.imdbID}>
-                  <Link to={`/movies/${movie.imdbID}`}>
-                    <figure className="movie__img--wrapper">
-                      <img src={movie.poster} alt="" className="movie__img" />
-                    </figure>
-                  </Link>
-                </div>
-              ))} */}
+              {loading ? (
+                <LoadingRec />
+              ) : (
+                recommended
+                  .map((recommend) => (
+                    <div className="movie" key={recommend.imdbID}>
+                      <Link to={`/movies/${recommend.imdbID}`}>
+                        <figure className="movie__img--wrapper">
+                          <img
+                            src={recommend.Poster}
+                            alt=""
+                            className="movie__img"
+                          />
+                        </figure>
+                      </Link>
+                    </div>
+                  ))
+                  .slice(1, 5)
+              )}
             </div>
           </div>
         </div>
