@@ -27,6 +27,14 @@ const Main = () => {
     }
   };
 
+  function sortMovies(filter) {
+    if (filter === "old") {
+      setMovies(movies.slice().sort((a, b) => a.Year - b.Year));
+    } else if (filter === "new") {
+      setMovies(movies.slice().sort((a, b) => b.Year - a.Year));
+    }
+  }
+
   // const handleLogoClick = () => {
   //   window.location.reload(); // Reload the page
   // };
@@ -71,6 +79,42 @@ const Main = () => {
           </div>
         </div>
       </header>
+
+      {movies.length > 0 && (
+        <section id="movies">
+          <div className="movies__container">
+            <div className="movies__row">
+              <div className="movies__top">
+                <div className="movies__search">
+                  Search: <span className="search__results">{searchTerm}</span>
+                </div>
+                <div className="movies__filter">
+                  <select
+                    name="filter"
+                    id="filter"
+                    value=""
+                    onChange={(event) => sortMovies(event.target.value)}
+                  >
+                    <option
+                      className="movies__filter--option"
+                      value=""
+                      disabled
+                    >
+                      Filter
+                    </option>
+                    <option className="movies__filter--option" value="new">
+                      Newest
+                    </option>
+                    <option className="movies__filter--option" value="old">
+                      Oldest
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <div className="movies__bottom">
         {loading ? (
