@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Loading from "./Loading";
-import LoadingRec from "./LoadingRec";
+import Loading from "../components/ui/Loading";
+import LoadingRec from "../components/ui/LoadingRec";
 
 const MovieInfo = () => {
   const { imdbID } = useParams();

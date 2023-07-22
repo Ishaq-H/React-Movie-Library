@@ -1,7 +1,7 @@
-import Main from "../components/Main";
+import Home from "../components/Home";
 
 const Landing = () => {
-  return <Main />;
+  return <Home />;
 };
 
 export default Landing;

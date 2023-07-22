@@ -114,6 +114,19 @@ nav {
   justify-content: center;
   align-items: center;
   text-align: center;
+  animation: animate-popcorn 800ms 200ms backwards;
+}
+
+@keyframes animate-popcorn {
+  0% {
+    transform: scale(0%);
+  }
+  80% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .header__logo {
@@ -133,6 +146,7 @@ nav {
   width: 100%;
   max-width: 720px;
   position: relative;
+  animation: fade-up 1000ms 400ms backwards;
 }
 
 .header__search--submit {
@@ -185,6 +199,17 @@ nav {
 .fa-spinner {
   filter: invert(1);
   animation: spin 1s infinite linear;
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* MOVIES */

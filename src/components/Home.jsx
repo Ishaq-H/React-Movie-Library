@@ -3,14 +3,18 @@ import Popcorn from "../assets/popcorn.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import LoadingPoster from "../pages/LoadingPoster";
+import LoadingPoster from "./ui/LoadingPoster";
 
-const Main = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState();
   const [searchTerm, setSearchTerm] = useState("");
 
   async function fetchMovies() {
+    if (!searchTerm.trim()) {
+      // If searchTerm is empty or contains only whitespace, return early
+      return;
+    }
     setLoading(true);
     const { data } = await axios.get(
       `http://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
@@ -95,12 +99,12 @@ const Main = () => {
                   <select
                     name="filter"
                     id="filter"
-                    value=""
+                    defaultValue="DEFAULT"
                     onChange={(event) => sortMovies(event.target.value)}
                   >
                     <option
                       className="movies__filter--option"
-                      value=""
+                      value="DEFAULT"
                       disabled
                     >
                       Filter
@@ -144,4 +148,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Home;
