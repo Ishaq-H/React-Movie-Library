@@ -28,10 +28,13 @@ const Main = () => {
   };
 
   function sortMovies(filter) {
+    setLoading(true);
     if (filter === "old") {
       setMovies(movies.slice().sort((a, b) => a.Year - b.Year));
+      setLoading(false);
     } else if (filter === "new") {
       setMovies(movies.slice().sort((a, b) => b.Year - a.Year));
+      setLoading(false);
     }
   }
 

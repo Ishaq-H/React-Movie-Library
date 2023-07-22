@@ -237,13 +237,19 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 20%;
+  width: 229px;
   margin: 24px;
+  transition: all 300ms ease;
+}
+
+.movie__wrapper:hover {
+  transform: scale(1.03);
 }
 
 .movie__img--wrapper {
   display: flex;
   align-items: center;
+  border-radius: 10px;
 }
 
 .movie__information {
@@ -493,16 +499,23 @@ footer {
   align-items: center;
   justify-content: center;
   margin-right: 12px;
+  transition: all 300ms ease;
 }
 
-.movie__img--wrapper {
+.movie:hover {
+  transform: scale(1.03);
+}
+
+.movie__selected--img {
   display: flex;
+  border-radius: 10px;
 }
 
 .movie__img {
   max-height: 500px;
   width: auto;
   max-width: 100%;
+  border-radius: 10px;
 }
 
 .movie__name {
