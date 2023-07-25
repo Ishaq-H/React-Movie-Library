@@ -31,16 +31,41 @@ const MovieInfo = () => {
       const { data } = await axios.get(
         `https://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
       );
-      setRecommended(data.Search || []);
+
+      const filteredRecommended = data.Search.filter(
+        (movie) => movie.imdbID !== imdbID
+      );
+
+      setRecommended(filteredRecommended || []);
       setLoading(false);
     } catch (error) {
       console.error(error);
     }
   }
 
+  // useEffect(() => {
+  //   fetchMovie();
+  //   fetchRecommended();
+  //   window.scrollTo(0, 0);
+  // }, [imdbID]);
+
   useEffect(() => {
-    fetchMovie();
-    fetchRecommended();
+    // Fetch movie and recommended movies
+    async function fetchData() {
+      try {
+        // Fetch the movie first
+        await fetchMovie();
+
+        // Then fetch the recommended movies after the movie information is available
+        await fetchRecommended();
+
+        setLoading(false); // Set loading to false when both data fetches are complete
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
     window.scrollTo(0, 0);
   }, [imdbID]);
 
