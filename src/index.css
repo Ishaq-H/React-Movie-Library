@@ -662,7 +662,7 @@ footer {
   .movie__selected--description {
     display: flex;
     align-items: center;
-    margin-top: 12px;
+    margin-top: 28px;
   }
   .movie__selected--year {
     text-align: center;
@@ -689,7 +689,7 @@ footer {
     text-align: center;
   }
   .movies-recommended {
-    padding-top: 20px;
+    padding-top: 0px;
   }
 }
 
