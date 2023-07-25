@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Popcorn from "../assets/popcorn.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import LoadingPoster from "./ui/LoadingPoster";
@@ -10,7 +10,6 @@ const Home = () => {
   const [loading, setLoading] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [prevSearchTerm, setPrevSearchTerm] = useState("");
-  const location = useLocation();
 
   async function fetchMovies() {
     if (!searchTerm.trim() || searchTerm.trim() === prevSearchTerm) {
@@ -53,17 +52,6 @@ const Home = () => {
     fetchMovies();
     setLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (location.state && location.state.hasSearchTerm) {
-      // Perform the search again using the stored search term
-      const storedSearchTerm = localStorage.getItem("movies");
-      if (storedSearchTerm) {
-        setSearchTerm(storedSearchTerm);
-        fetchMovies();
-      }
-    }
-  }, [location.state]);
 
   return (
     <>
