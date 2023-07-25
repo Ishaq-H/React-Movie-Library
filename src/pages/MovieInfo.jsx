@@ -15,7 +15,7 @@ const MovieInfo = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://www.omdbapi.com/?apikey=bdab0567&i=${imdbID}`
+        `https://www.omdbapi.com/?apikey=bdab0567&i=${imdbID}`
       );
       setMovie(data || []);
       setLoading(false);
@@ -29,7 +29,7 @@ const MovieInfo = () => {
     try {
       const searchTerm = localStorage.getItem("movies");
       const { data } = await axios.get(
-        `http://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
+        `https://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
       );
       setRecommended(data.Search || []);
       setLoading(false);

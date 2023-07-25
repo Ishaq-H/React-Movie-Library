@@ -18,7 +18,7 @@ const Home = () => {
     }
     setLoading(true);
     const { data } = await axios.get(
-      `http://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
+      `https://www.omdbapi.com/?apikey=bdab0567&s=${searchTerm}`
     );
     localStorage.setItem("movies", searchTerm);
     setMovies(data.Search || []);
