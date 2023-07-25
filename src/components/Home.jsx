@@ -9,9 +9,10 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState();
   const [searchTerm, setSearchTerm] = useState("");
+  const [prevSearchTerm, setPrevSearchTerm] = useState("");
 
   async function fetchMovies() {
-    if (!searchTerm.trim()) {
+    if (!searchTerm.trim() || searchTerm.trim() === prevSearchTerm) {
       // If searchTerm is empty or contains only whitespace, return early
       return;
     }
@@ -21,6 +22,7 @@ const Home = () => {
     );
     localStorage.setItem("movies", searchTerm);
     setMovies(data.Search || []);
+    setPrevSearchTerm(searchTerm.trim());
     setLoading(false);
   }
 

@@ -121,7 +121,7 @@ const MovieInfo = () => {
                       </Link>
                     </div>
                   ))
-                  .slice(1, 5)
+                  .slice(0, 4)
               )}
             </div>
           </div>
