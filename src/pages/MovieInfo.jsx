@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Loading from "../components/ui/Loading";
 import LoadingRec from "../components/ui/LoadingRec";
 
@@ -10,6 +10,7 @@ const MovieInfo = () => {
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState([]);
   const [recommended, setRecommended] = useState([]);
+  const navigate = useNavigate();
 
   async function fetchMovie() {
     setLoading(true);
@@ -43,6 +44,17 @@ const MovieInfo = () => {
     }
   }
 
+  const handleBackToMoviesClick = () => {
+    const searchTerm = localStorage.getItem("movies");
+    if (searchTerm) {
+      // If the searchTerm is available in local storage, navigate back to the search results page
+      navigate("/", { state: { hasSearchTerm: true } });
+    } else {
+      // If the searchTerm is not available, navigate to the home page
+      navigate("/");
+    }
+  };
+
   // useEffect(() => {
   //   fetchMovie();
   //   fetchRecommended();
@@ -64,7 +76,6 @@ const MovieInfo = () => {
         console.error(error);
       }
     }
-
     fetchData();
     window.scrollTo(0, 0);
   }, [imdbID]);
@@ -75,10 +86,11 @@ const MovieInfo = () => {
         <div className="movieInfo__container">
           <div className="movieInfo__row">
             <div className="movieInfo__selected--top">
-              <Link to="/" className="movie__link-arrow">
+              <Link
+                className="movie__link-arrow"
+                onClick={handleBackToMoviesClick}
+              >
                 <FontAwesomeIcon icon="arrow-left" />
-              </Link>
-              <Link to="/" className="movie__link-name">
                 <h2 className="movie__selected--title--top">Movies</h2>
               </Link>
             </div>
