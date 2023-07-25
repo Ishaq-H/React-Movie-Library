@@ -143,7 +143,7 @@ const Home = () => {
                 </Link>
               </div>
             ))
-            .slice(0, 6)
+            .slice(0, 8)
         )}
       </div>
     </>

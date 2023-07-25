@@ -255,6 +255,8 @@ nav {
   justify-content: space-evenly;
   margin-top: 48px;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .movie__wrapper {
