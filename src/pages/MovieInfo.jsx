@@ -7,7 +7,7 @@ import LoadingRec from "../components/ui/LoadingRec";
 
 const MovieInfo = () => {
   const { imdbID } = useParams();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState([]);
   const [recommended, setRecommended] = useState([]);
 
@@ -41,6 +41,7 @@ const MovieInfo = () => {
   useEffect(() => {
     fetchMovie();
     fetchRecommended();
+    window.scrollTo(0, 0);
   }, [imdbID]);
 
   return (
